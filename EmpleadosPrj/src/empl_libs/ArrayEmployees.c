@@ -16,7 +16,7 @@
 #define TRUE 0
 #define FALSE 1
 
-int findFirstFreeEmpl(Employee employees[]){
+static int findFirstFreeEmpl(Employee employees[]){
 	int found = FALSE;
 	int i = 0;
 	while((i < sizeof(employees)) && (found==FALSE)){

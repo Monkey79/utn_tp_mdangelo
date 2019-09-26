@@ -1,0 +1,47 @@
+Array en C:
+#define QTY 5 //constante
+
+int edades[QTY];
+edades[4]=22;
+
+IMPORTANTE : si pongo edades asi solo esto me devuelve la DIRECCION DE MEMORIA DEL PRIMER ELEMENTO DEL ARRAY
+	Entoncs : edades === &edades[0] //es equivalente DA TRUE
+
+
+
+Recibiendo array
+
+//una forma de recibir (NO recomendable)
+int initArr (int arr[], int limite, int valor) {
+
+}
+
+-----------------------------------------------------------
+PARA PASARLO : 
+	initArr(edades, 3, 0);
+	Y PORQUE NO JUGANDO CON PUNTEROS ; initArr(edades+4, 3, 0);
+
+
+//otra forma (SI recomendable) --> como se que es un array? bueno por el nombre "pArray"
+int initArr (int *pArray, int limite, int valor) {
+
+}
+
+CUANDO PASAMOS UN ARRAY EN C => ESTAMOS PASANDO UNA DIRECCION DE MEMORIA. NADA MAS!!
+
+QUe puedo validar en un array en C ? : NO mucho solo que lo que me pasen SEA una
+direccion de memoria : -->ASI--> pArray != NULL
+
+Para imprimir valor de un array pasado por parametro : pArray[1]
+
+ANTES de un scanF usar "__fpurgue(stdin)" <stdio.h>
+
+ACA TODO VALOR POSITIVO (INCLUYENDO EL CERO) ES OK Y SI ES NEGATIVO ES ERROR
+
+repo profe 
+https://github.com/davilamr/ClasesPL1_2019_2C
+
+
+
+
+
