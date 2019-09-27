@@ -17,6 +17,7 @@ struct{
 	int isEmpty;
 }typedef Employee;
 
+	int findFirstFreeEmpl(Employee employees[],int length);
 	int initEmployee(Employee employees[], int length);
 	int addEmployee(Employee employees[], int length, int id, char name[], char lastName[], float salary, int sector);
 	int findEMployeeById(Employee employees[], int length, int id);

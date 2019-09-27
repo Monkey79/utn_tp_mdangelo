@@ -10,19 +10,15 @@
 
 	#include "../empl_libs/ArrayEmployees.h"
 
-	/*
-	 * Author: mdangelo
-	 * Purpose: Construye el menu y valida que la seleccion del usuario
-	 */
-	int showMenuAndGetUserSelection();
-	/*
-	 * Author: mdangelo
-	 * Purpose: Chequea que exista algun empleado previamente cargado (que su bandera isEmpty=TRUE)
-	 * ni bien encuentra uno se detiene y devuelve TRUE caso opuesto FALSE
-	 */
-	int isAlreadyChargedEmployee(Employee employees[], int length, int *isChrgd);
 
+	//Purpose: Construye el menu y valida que la seleccion del usuario este dentro de lo esperado
+	int showMenuAndGetUserSelection();
+	//Purpose: Crea un empleado en la primera posicion libre que encuentre (isEmpty=TRUE)
 	int createEmployee(Employee employees[], int length);
+	//Purpose: Actualiza un empleado pidiendo el ID de ese empleado
+	int updateEmployee(Employee employees[], int length);
+	int deleteEmployee(Employee employees[], int length);
+
 
 
 #endif /* EMPL_MENU_EMPLOYEESMANAGER_H_ */

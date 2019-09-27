@@ -16,10 +16,10 @@
 #define TRUE 0
 #define FALSE 1
 
-static int findFirstFreeEmpl(Employee employees[]){
+int findFirstFreeEmpl(Employee employees[],int length){
 	int found = FALSE;
 	int i = 0;
-	while((i < sizeof(employees)) && (found==FALSE)){
+	while((i < length) && (found==FALSE)){
 		found = (employees[i].isEmpty == TRUE);
 		i++;
 	}
@@ -29,7 +29,7 @@ static int findFirstFreeEmpl(Employee employees[]){
 
 int initEmployee(Employee employees[], int length) {
 	int status = ERROR;
-		if(employees!= NULL && (sizeof(employees) == length)){
+		if(employees!= NULL && length>0){
 			status = SUCCESS;
 			for (int i = 0; i < length;i++) {
 				employees[i].isEmpty = TRUE;
@@ -42,14 +42,16 @@ int initEmployee(Employee employees[], int length) {
 int addEmployee(Employee employees[], int length, int id, char name[], char lastName[], float salary, int sector){
 	int status = ERROR;
 	int indx;
-		if(employees!= NULL && (sizeof(employees) == length)){
-			indx = findFirstFreeEmpl(employees);
+		if(employees!= NULL && length>0){
+			indx = findFirstFreeEmpl(employees, length);
 			if(indx >= 0){
 				status = SUCCESS;
+				employees[indx].id = id;
 				strcpy(employees[indx].name, name);
 				strcpy(employees[indx].lastName, lastName);
 				employees[indx].salary = salary;
 				employees[indx].sector = sector;
+				employees[indx].isEmpty = FALSE;
 			}
 		}
 	return status;
@@ -58,7 +60,7 @@ int addEmployee(Employee employees[], int length, int id, char name[], char last
 int findEMployeeById(Employee employees[], int length, int nId) {
 	int found = FALSE;
 	int i = 0;
-	if(employees!= NULL && (sizeof(employees) == length)){
+	if(employees!= NULL && length>0){
 		while((i < sizeof(employees)) && (found==FALSE)){
 			found = (employees[i].id == nId);
 			i++;
@@ -71,7 +73,7 @@ int findEMployeeById(Employee employees[], int length, int nId) {
 int removeEmployee(Employee employees[], int length, int id) {
 	int status = ERROR;
 	int empId = -1;
-	if(employees!= NULL && (sizeof(employees) == length)){
+	if(employees!= NULL && length>0){
 		empId = findEMployeeById(employees, length, id);
 		if((empId >= 0) && (employees[empId].isEmpty==FALSE)){
 			employees[empId].isEmpty = TRUE;
@@ -86,7 +88,7 @@ int sortEmployees(Employee employees[], int length, int order){
 	int isDisrd = TRUE;
 	Employee emplAUx;
 
-	if(employees!= NULL && (sizeof(employees) == length)){
+	if(employees!= NULL && length>0){
 		while(isDisrd == TRUE){
 			isDisrd = FALSE;
 			for (int i = 0; i < length-1; i++) {
@@ -106,7 +108,7 @@ int sortEmployees(Employee employees[], int length, int order){
 
 int printEmployees(Employee employees[], int length) {
 	int status = ERROR;
-	if(employees!= NULL && (sizeof(employees) == length)){
+	if(employees!= NULL && length>0){
 		for(int i=0; i< length; i++){
 			printf("Empleado.id %i \n",employees[i].id);
 			printf("Empleado.name %s \n",employees[i].name);
