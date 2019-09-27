@@ -27,7 +27,7 @@
 #define EMP_TOP 1000
 
 
-int EMP_ID = 0;
+
 
 int main(void) {
 	Employee employeesList[EMP_TOP];
