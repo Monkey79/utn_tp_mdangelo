@@ -24,7 +24,7 @@
 
 #define TRUE 1
 #define FALSE 0
-#define EMP_TOP 5
+#define EMP_TOP 1000
 
 
 
