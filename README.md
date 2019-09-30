@@ -1,8 +1,8 @@
 # utn_tp_mdangelo
-repo para tps de utn avellaneda
+Repo para Tps de Utn-Avellaneda
 
 /*
- * Titulo: TP1 - Calculadora
+ * NOTAS sobre TP1 - Calculadora
  * Author: Mariano DAngelo
  * Purpose: Main de la calculadora:
  * Alcance: La aplicacion va a estar mostrando siempre el menu
