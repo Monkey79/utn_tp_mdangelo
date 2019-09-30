@@ -13,17 +13,20 @@
 #define SUCCESS 0
 #define ERROR -1
 
-#define TRUE 0
-#define FALSE 1
+#define TRUE  1
+#define FALSE 0
+
+void orderAsc(Employee employees[], int length);
+void orderDesc(Employee employees[], int length);
 
 int findFirstFreeEmpl(Employee employees[],int length){
-	int found = FALSE;
+	int notEmpty = TRUE;
 	int i = 0;
-	while((i < length) && (found==FALSE)){
-		found = (employees[i].isEmpty == TRUE);
+	do{
+		notEmpty = (employees[i].isEmpty  == FALSE);
 		i++;
-	}
-	i = (found == FALSE)?-1:(i-1);
+	}while((i < length) && notEmpty==TRUE);
+	i = (notEmpty == TRUE)?-1:(i-1);
 	return i;
 }
 
@@ -49,7 +52,7 @@ int addEmployee(Employee employees[], int length, int id, char name[], char last
 				employees[indx].id = id;
 				strcpy(employees[indx].name, name);
 				strcpy(employees[indx].lastName, lastName);
-				employees[indx].salary = salary;
+				employees[indx].salary = (float)salary;
 				employees[indx].sector = sector;
 				employees[indx].isEmpty = FALSE;
 			}
@@ -61,7 +64,7 @@ int findEMployeeById(Employee employees[], int length, int nId) {
 	int found = FALSE;
 	int i = 0;
 	if(employees!= NULL && length>0){
-		while((i < sizeof(employees)) && (found==FALSE)){
+		while((i < length) && found==FALSE){
 			found = (employees[i].id == nId);
 			i++;
 		}
@@ -78,6 +81,10 @@ int removeEmployee(Employee employees[], int length, int id) {
 		if((empId >= 0) && (employees[empId].isEmpty==FALSE)){
 			employees[empId].isEmpty = TRUE;
 			status = SUCCESS;
+			printf("\nEXITO. Se borro al empleado %s \n", employees[empId].name);
+
+		}else{
+			printf("\n No existe empleado con ese Id\n");
 		}
 	}
 	return status;
@@ -85,38 +92,68 @@ int removeEmployee(Employee employees[], int length, int id) {
 
 int sortEmployees(Employee employees[], int length, int order){
 	int status = ERROR;
-	int isDisrd = TRUE;
-	Employee emplAUx;
-
 	if(employees!= NULL && length>0){
-		while(isDisrd == TRUE){
-			isDisrd = FALSE;
-			for (int i = 0; i < length-1; i++) {
-				if((strcmp(employees[i].lastName, employees[i+1].lastName)>0) &&(employees[i].sector>employees[i+1].sector)){
-					emplAUx = employees[i];
-					employees[i] = employees[i+1];
-					employees[i+1] = emplAUx;
-					isDisrd = TRUE;
-				}
-			}//end for
-		}
+		if(order==1)
+			orderAsc(employees, length);
+		else if(order == 0)
+			orderDesc(employees, length);
 		status = SUCCESS;
 	}
-
 	return status;
 }
 
 int printEmployees(Employee employees[], int length) {
 	int status = ERROR;
+	Employee empl;
+
 	if(employees!= NULL && length>0){
 		for(int i=0; i< length; i++){
-			printf("Empleado.id %i \n",employees[i].id);
-			printf("Empleado.name %s \n",employees[i].name);
-			printf("Empleado.lastName %s \n",employees[i].lastName);
-			printf("Empleado.sector %i \n",employees[i].sector);
+			empl = employees[i];
+			if(empl.isEmpty == 0){
+					printf("\n Empleado.ID:: %d \n", empl.id);
+					printf("\n Empleado.nombre:: %s\n", empl.name);
+					printf("\n Empleado.apellido:: %s \n", empl.lastName);
+					printf("\n Empleado.salario:: %f \n", empl.salary);
+					printf("\n Empleado.sector:: %d \n", empl.sector);
+			}
 		}
 	}
 	return status;
+}
+/**********Private Functions************************************/
+void orderAsc(Employee employees[], int length){
+	printf("\n==ORD ASC===\n");
+	int isDisrd = TRUE;
+	Employee emplAUx;
+
+	while(isDisrd == TRUE){
+		isDisrd = FALSE;
+		for (int i = 0; i < length-1; i++) {
+			if((strcmp(employees[i].lastName, employees[i+1].lastName)>0) && (employees[i].sector>employees[i+1].sector)){
+				emplAUx = employees[i];
+				employees[i] = employees[i+1];
+				employees[i+1] = emplAUx;
+				isDisrd = TRUE;
+			}
+		}//end for
+	}
+}
+void orderDesc(Employee employees[], int length){
+	printf("\n==ORD DESC===\n");
+	int isDisrd = TRUE;
+	Employee emplAUx;
+
+	while(isDisrd == TRUE){
+		isDisrd = FALSE;
+		for (int i = 0; i < length-1; i++) {
+			if((strcmp(employees[i].lastName, employees[i+1].lastName) < 0) && (employees[i].sector < employees[i+1].sector)){
+				emplAUx = employees[i];
+				employees[i] = employees[i+1];
+				employees[i+1] = emplAUx;
+				isDisrd = TRUE;
+			}
+		}//end for
+	}
 }
 
 

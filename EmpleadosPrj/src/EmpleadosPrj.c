@@ -17,31 +17,39 @@
 #define CREATE_EMPLOYEE 1
 #define UPDATE_EMPLOYEE 2
 #define DELETE_EMPLOYEE 3
-#define SHOW_ALL_EMPLOYEE 4
+#define MAKE_INFORM 4
 
 #define SUCCESS 1
 #define ERROR  -1
 
 #define TRUE 1
 #define FALSE 0
-#define EMP_TOP 1000
+#define EMP_TOP 5
 
 
 
 
 int main(void) {
 	Employee employeesList[EMP_TOP];
+	int status;
 
+	initAllEmployees(employeesList, EMP_TOP);
 
 	int userSelection = showMenuAndGetUserSelection();
 
-	/*if(userSelection == CREATE_EMPLOYEE){
-		createEmployee(employeesList, EMP_TOP);
-	}else if(userSelection == UPDATE_EMPLOYEE){
-		updateEmployee(employeesList, EMP_TOP);
-	}else if(userSelection == DELETE_EMPLOYEE){
-		removeEmployee(employeesList, EMP_TOP);
-	}*/
+	do{
+		if(userSelection == CREATE_EMPLOYEE){
+			status = createEmployee(employeesList, EMP_TOP);
+		}else if(userSelection == UPDATE_EMPLOYEE){
+			updateEmployee(employeesList, EMP_TOP);
+		}else if(userSelection == DELETE_EMPLOYEE){
+			deleteEmployeeById(employeesList, EMP_TOP);
+		}
+		userSelection = showMenuAndGetUserSelection();
 
-	return EXIT_SUCCESS;
+	}while(userSelection==CREATE_EMPLOYEE || userSelection==UPDATE_EMPLOYEE || userSelection==DELETE_EMPLOYEE);
+
+	if(userSelection == MAKE_INFORM) makeEmployeeInform(employeesList, EMP_TOP);
+
+	return status;
 }
