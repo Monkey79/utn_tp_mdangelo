@@ -18,13 +18,11 @@ Repo para Tps de Utn-Avellaneda
 
 /*
  * Author: Mariano DAngelo
- * Purpose: Main de la calculadora:
+ * Purpose: ABM de 1000 Empleados:
  * Alcance: La aplicacion va a estar mostrando siempre el menu
- * con las opciones pedidas en el TP (salvo que el usuario seleccione la op 5 de SALIR)
- * ATENCION: Para los RESULTADOS (opcion 4) se van a MOSTRAR arriba del menu de opciones (ya que asumi
- * que si bien puede pedir la muestra de los resultados aun puede seguir operando con la calculadora)
- * es por eso QUE se va a tener que hacer "scroll" hacia arriba para ver los resultados. Disculpen
- * lo precario del manejo de la consola.
+ * con las opciones pedidas en el TP (para terminar el abm tiene que seleccionar la opcion 4 = Informar)
+ * la cual lista (previo ordenamiento que por defecto se hace en forma asc y calculos pedidos en el tp)
+ * todos los empleados ingresados hasta el momento.
  * Language:  C
  */
 
