@@ -167,11 +167,11 @@ int calcTotalAndAverageSalary(Employee employees[], int length){
 			}
 		}
 	}
-
-	printf("\nEl total de los salarios de todos los empleados es de %f \n",salaryTot);
-	printf("\nEl promedio de los salarios de todos los empleados es de %f \n",emplSlryAvrg);
-	printf("\nLa cantidad de empleados que superan este promedio es de %d \n",emplSlaryAvrgCnt);
-
+	printf("\n*************Datos de todos los empleados****************\n");
+	printf("\nEl total de los salarios de todos los empleados es de %f",salaryTot);
+	printf("\nEl promedio de los salarios de todos los empleados es de %f",emplSlryAvrg);
+	printf("\nLa cantidad de empleados que superan este promedio es de %d",emplSlaryAvrgCnt);
+	printf("\n********************************************************");
 	return status;
 }
 int sortMyEmployees(Employee employees[], int length){

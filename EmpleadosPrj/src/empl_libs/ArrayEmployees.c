@@ -18,6 +18,7 @@
 
 void orderAsc(Employee employees[], int length);
 void orderDesc(Employee employees[], int length);
+void swapEmpl(Employee *empl1, Employee *empl2);
 
 int findFirstFreeEmpl(Employee employees[],int length){
 	int notEmpty = TRUE;
@@ -110,11 +111,13 @@ int printEmployees(Employee employees[], int length) {
 		for(int i=0; i< length; i++){
 			empl = employees[i];
 			if(empl.isEmpty == 0){
-					printf("\n Empleado.ID:: %d \n", empl.id);
-					printf("\n Empleado.nombre:: %s\n", empl.name);
-					printf("\n Empleado.apellido:: %s \n", empl.lastName);
-					printf("\n Empleado.salario:: %f \n", empl.salary);
-					printf("\n Empleado.sector:: %d \n", empl.sector);
+				printf("\n*********Empleado************\n");
+				printf("Empleado.ID::%d \n", empl.id);
+				printf("Empleado.nombre::%s\n", empl.name);
+				printf("Empleado.apellido::%s\n", empl.lastName);
+				printf("Empleado.salario::%f\n", empl.salary);
+				printf("Empleado.sector::%d\n", empl.sector);
+				printf("\n******************************\n");
 			}
 		}
 	}
@@ -124,12 +127,21 @@ int printEmployees(Employee employees[], int length) {
 void orderAsc(Employee employees[], int length){
 	printf("\n==ORD ASC===\n");
 	int isDisrd = TRUE;
+	int lstNmStrCmpr;
 	Employee emplAUx;
 
 	while(isDisrd == TRUE){
 		isDisrd = FALSE;
 		for (int i = 0; i < length-1; i++) {
-			if((strcmp(employees[i].lastName, employees[i+1].lastName)>0) && (employees[i].sector>employees[i+1].sector)){
+			lstNmStrCmpr = strcmp(employees[i].lastName, employees[i+1].lastName);
+			if(lstNmStrCmpr == 0){
+				if(employees[i].sector > employees[i+1].sector) {
+					emplAUx = employees[i];
+					employees[i] = employees[i+1];
+					employees[i+1] = emplAUx;
+					isDisrd = TRUE;
+				}
+			}else if(lstNmStrCmpr > 0){
 				emplAUx = employees[i];
 				employees[i] = employees[i+1];
 				employees[i+1] = emplAUx;
@@ -138,15 +150,25 @@ void orderAsc(Employee employees[], int length){
 		}//end for
 	}
 }
+
 void orderDesc(Employee employees[], int length){
 	printf("\n==ORD DESC===\n");
 	int isDisrd = TRUE;
+	int lstNmStrCmpr;
 	Employee emplAUx;
 
 	while(isDisrd == TRUE){
 		isDisrd = FALSE;
 		for (int i = 0; i < length-1; i++) {
-			if((strcmp(employees[i].lastName, employees[i+1].lastName) < 0) && (employees[i].sector < employees[i+1].sector)){
+			lstNmStrCmpr = strcmp(employees[i].lastName, employees[i+1].lastName);
+			if(lstNmStrCmpr == 0){
+				if(employees[i].sector < employees[i+1].sector){
+					emplAUx = employees[i];
+					employees[i] = employees[i+1];
+					employees[i+1] = emplAUx;
+					isDisrd = TRUE;
+				}
+			}else if(lstNmStrCmpr<0){
 				emplAUx = employees[i];
 				employees[i] = employees[i+1];
 				employees[i+1] = emplAUx;
@@ -155,6 +177,3 @@ void orderDesc(Employee employees[], int length){
 		}//end for
 	}
 }
-
-
-
