@@ -1,8 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "LinkedList.h"
-
-
 /****************************************************
     Menu:
      1. Cargar los datos de los empleados desde el archivo data.csv (modo texto).
@@ -17,10 +12,14 @@
     10. Salir
 *****************************************************/
 
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "LinkedList.h"
 #include "Controller.h"
 #include "Employee.h"
-#include "file-libs/FileMng.h"
 
+#include "file-libs/FileMng.h"
 #include "menu-builder/MenuBuilder.h"
 
 #define TRUE 1
@@ -28,42 +27,34 @@
 
 //User selection:
 #define CHARGE_DATA_EMPLY_FROM_FILE_TXT 1
+#define WRITE_DATA_EMPLY_TO_FILE_TXT 8
 
-
-void _checkUserSelectionAndExecute(int usrSlct);
+void _checkUserSelectionAndExecute(int usrSlct,LinkedList *pArrayListEmployee);
 
 int main()
 {
 	int usrSlct = 0;
+	LinkedList *pArrayListEmployee = ll_newLinkedList();
+
 
 	do {
 		mb_createMenuAndGetUsserSelection(&usrSlct);
-		_checkUserSelectionAndExecute(usrSlct);
+		_checkUserSelectionAndExecute(usrSlct,pArrayListEmployee);
 	} while (mb_isValidSelection(usrSlct)==TRUE);
 
 	return 0;
 }
 
-void _checkUserSelectionAndExecute(int usrSlct){
-	FILE *file = NULL;
-	char filePath[12] = "./dataB.csv";
-	char mode[3] = "r";
-	int cant;
-	Employee emp;
-
-    int id;
-    char nombre[128];
-    int horasTrabajadas;
-    int sueldo;
+void _checkUserSelectionAndExecute(int usrSlct,LinkedList *pArrayListEmployee){
+	char filePath[25] = "./assets/data3.csv";
+	char filePathWrite[25] = "./assets/dataWrt.csv";
 
 	switch (usrSlct) {
 		case CHARGE_DATA_EMPLY_FROM_FILE_TXT:
-			file = fm_openAndGetFile(filePath, mode);
-			while(!feof(file)){
-				cant = fscanf(file,"%d,%[^,],%d,%d\n",&id,nombre,&horasTrabajadas,&sueldo);
-				printf("\n%d\t%s\t%d\t%d\n",id,nombre, horasTrabajadas, sueldo);
-			}
-			fclose(file);
+			controller_loadFromText(filePath,pArrayListEmployee);
+			break;
+		case WRITE_DATA_EMPLY_TO_FILE_TXT:
+			controller_saveAsText(filePathWrite,pArrayListEmployee);
 			break;
 		default:
 			break;

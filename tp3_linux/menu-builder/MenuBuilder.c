@@ -62,6 +62,3 @@ void _showMenuItems() {
 void _showMenuFooter(){
 	printf("****************************************************************\n");
 }
-
-
-
