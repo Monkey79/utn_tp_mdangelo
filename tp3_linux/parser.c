@@ -19,7 +19,7 @@
  */
 int parser_EmployeeFromText(FILE* pFile , LinkedList* pArrayListEmployee) {
 	int status = ERROR;
-	char patter[17] ="%d,%[^,],%d,%d\n";
+	char patter[50] ="%[^,],%[^,],%[^,],%[^\n]\n";
 	int firstRecord = TRUE;
 	int cant;
 
@@ -32,16 +32,17 @@ int parser_EmployeeFromText(FILE* pFile , LinkedList* pArrayListEmployee) {
 	if(pFile != NULL){
 			while(!feof(pFile)){
 				cant = fm_getRecord(pFile,patter, empIdStr, empNameStr, empHrsJobStr, empSalaryStr, &firstRecord);
+				//printf("-ok-reg:->\n%s\t%s\t%s\t%s\n",empIdStr,empNameStr,empHrsJobStr,empSalaryStr);
+
 				if(cant==4){
 					emp = employee_newParametros(empIdStr, empNameStr,empHrsJobStr,empSalaryStr);
-					printf("\n Emp.ID %d", emp->id);
-					printf("\n Emp.NOMBRE %s", emp->nombre);
-					printf("\n Emp.HorasTrag %d", emp->horasTrabajadas);
-					printf("\n Emp.Sueldo %d\n", emp->sueldo);
+					//printf("\n Emp.ID %d", emp->id);
+					//printf("\n Emp.NOMBRE %s", emp->nombre);
+					//printf("\n Emp.HorasTrag %d", emp->horasTrabajadas);
+					//printf("\n Emp.Sueldo %d\n", emp->sueldo);
 					status = ll_add(pArrayListEmployee, emp);
-					printf("\n STATUS_LL-ADD %d", status);
 				}else{
-					printf("\n error \n");
+					printf("\n ERROR: parcer.c [parser_EmployeeFromText] line 46 \n");
 				}
 			}
 		}

@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1540336796 source:d:\dfernandez\archivoe\main.c
+	<stdio.h>
+
+1561321124 source:e:\yxs\a-utn\ejercicios\clase18\archivoe\main.c
+	<stdio.h>
+	<stdlib.h>
+	<conio.h>
+

@@ -111,27 +111,37 @@ int controller_sortEmployee(LinkedList* pArrayListEmployee)
  *
  */
 int controller_saveAsText(char* path , LinkedList* pArrayListEmployee) {
+	int status = ERROR;
 	FILE *pFileWrt = NULL;
-	char mode[3] = "w"; //W= write text-mode
-	int emplQty = 0;
 	Employee *empl=NULL;
+
+	char mode[3] = "w"; //W= write text-mode
+	char openMask[50] ="%d,%s,%d,%d\n";
+	int emplCant = 0;
 
 	pFileWrt = fm_openAndGetFile(path,mode);
 
 	if(pFileWrt != NULL){
-		emplQty = ll_len(pArrayListEmployee);
-		if(emplQty>0){
-			for(int i=0 ; i<emplQty; i++){
+		emplCant = ll_len(pArrayListEmployee);
+		if(emplCant>0){
+			for(int i=0 ; i<emplCant; i++){
 				empl = ll_get(pArrayListEmployee, i);
 				printf("\nemp.id %d",empl->id);
 				printf("\nemp.nombre %s",empl->nombre);
 				printf("\nemp.horas %d",empl->horasTrabajadas);
 				printf("\nemp.salario %d\n",empl->sueldo);
+
+				status = fm_writeRow(empl->id, empl->nombre, empl->horasTrabajadas, empl->sueldo, pFileWrt);
+
+				printf("\n write status=%d ", status);
 			}
-		}else
+		}else{
 			printf("\n Error: NO hay nada para escribir\n");
+		}
+
 	}
-    return 1;
+	fm_closeFile(pFileWrt);
+    return status;
 }
 
 /** \brief Guarda los datos de los empleados en el archivo data.csv (modo binario).
